@@ -13,12 +13,6 @@ build/
 .cursor/
 *.iml
 
-# Model
-models/*.pkl
-
-# Data
-data/*.csv
-
 # OS
 .DS_Store
 Thumbs.db

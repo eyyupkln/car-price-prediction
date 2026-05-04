@@ -7,6 +7,10 @@
 ![XGBoost](https://img.shields.io/badge/XGBoost-2.1.1-orange)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.5.2-F7931E?logo=scikitlearn)
+[![Live Demo](https://img.shields.io/badge/🌐_Canlı_Demo-Render-46E3B7?logo=render)](https://car-price-prediction-lhrp.onrender.com)
+
+> 🌐 **[Canlı Demo → car-price-prediction-lhrp.onrender.com](https://car-price-prediction-lhrp.onrender.com)**
+> ⚠️ Ücretsiz sunucuda çalıştığından ilk açılış 30-60 saniye sürebilir.
 
 ---
 
@@ -30,30 +34,30 @@ Kullanıcı; marka, model, varyant, kilometre, model yılı, motor hacmi, renk v
 
 Türkiye'nin önde gelen ikinci el araç platformlarından derlenen gerçek ilan verisi kullanılmıştır.
 
-| Özellik           | Değer                      |
-| ----------------- | -------------------------- |
-| Ham kayıt sayısı  | 253.344                    |
-| Temizleme sonrası | 250.121                    |
-| Marka sayısı      | 22                         |
-| Model sayısı      | 143                        |
-| Varyant sayısı    | 2.118                      |
-| Renk sayısı       | 18                         |
-| Şehir sayısı      | 81                         |
-| Yıl aralığı       | 1972 – 2025                |
-| Fiyat aralığı     | 100.000 TL – 10.000.000 TL |
-| Ortalama fiyat    | 1.094.579 TL               |
-| Medyan fiyat      | 879.000 TL                 |
+| Özellik | Değer |
+|---|---|
+| Ham kayıt sayısı | 253.344 |
+| Temizleme sonrası | 250.121 |
+| Marka sayısı | 22 |
+| Model sayısı | 143 |
+| Varyant sayısı | 2.118 |
+| Renk sayısı | 18 |
+| Şehir sayısı | 81 |
+| Yıl aralığı | 1972 – 2025 |
+| Fiyat aralığı | 100.000 TL – 10.000.000 TL |
+| Ortalama fiyat | 1.094.579 TL |
+| Medyan fiyat | 879.000 TL |
 
-| Sütun     | Açıklama          |
-| --------- | ----------------- |
-| `brand`   | Araç markası      |
-| `model`   | Araç modeli       |
-| `variant` | Varyant / paket   |
-| `km`      | Kilometre bilgisi |
-| `year`    | Model yılı        |
-| `color`   | Araç rengi        |
-| `city`    | İlan şehri        |
-| `price`   | Satış fiyatı (TL) |
+| Sütun | Açıklama |
+|---|---|
+| `brand` | Araç markası |
+| `model` | Araç modeli |
+| `variant` | Varyant / paket |
+| `km` | Kilometre bilgisi |
+| `year` | Model yılı |
+| `color` | Araç rengi |
+| `city` | İlan şehri |
+| `price` | Satış fiyatı (TL) |
 
 ---
 
@@ -63,21 +67,21 @@ Türkiye'nin önde gelen ikinci el araç platformlarından derlenen gerçek ilan
 
 ### Model Karşılaştırması
 
-| Model             | MAE (TL)   | RMSE (TL)   | R²         |
-| ----------------- | ---------- | ----------- | ---------- |
-| Linear Regression | 149.257    | 328.082     | 0.9214     |
-| Random Forest     | 133.281    | 244.164     | 0.9283     |
-| Gradient Boosting | 85.190     | 150.744     | 0.9644     |
-| LightGBM          | 91.974     | 168.757     | 0.9614     |
-| **XGBoost**       | **84.637** | **149.423** | **0.9649** |
+| Model | MAE (TL) | RMSE (TL) | R² |
+|---|---|---|---|
+| Linear Regression | 149.257 | 328.082 | 0.9214 |
+| Random Forest | 133.281 | 244.164 | 0.9283 |
+| Gradient Boosting | 85.190 | 150.744 | 0.9644 |
+| LightGBM | 91.974 | 168.757 | 0.9614 |
+| **XGBoost** | **84.637** | **149.423** | **0.9649** |
 
 ### ✅ Final Model (XGBoost — Tuned)
 
-| Metrik       | Değer          | Açıklama                       |
-| ------------ | -------------- | ------------------------------ |
-| **R² Skoru** | **0.9665**     | Varyansın %96,65'i açıklanıyor |
-| **MAE**      | **80.341 TL**  | Ortalama mutlak hata           |
-| **RMSE**     | **139.915 TL** | Karekök ortalama kare hata     |
+| Metrik | Değer | Açıklama |
+|---|---|---|
+| **R² Skoru** | **0.9665** | Varyansın %96,65'i açıklanıyor |
+| **MAE** | **80.341 TL** | Ortalama mutlak hata |
+| **RMSE** | **139.915 TL** | Karekök ortalama kare hata |
 
 > Hiperparametre optimizasyonu: `n_estimators=800`, `max_depth=10`, `learning_rate=0.05`, `subsample=0.9`, `colsample_bytree=0.9`
 
@@ -97,14 +101,14 @@ Türkiye'nin önde gelen ikinci el araç platformlarından derlenen gerçek ilan
 
 ## 🛠️ Kullanılan Teknolojiler
 
-| Katman           | Teknoloji                                |
-| ---------------- | ---------------------------------------- |
-| Backend          | FastAPI, Uvicorn                         |
-| ML               | XGBoost, scikit-learn, category_encoders |
-| Veri İşleme      | Pandas, NumPy                            |
-| Frontend         | HTML, Tailwind CSS (vanilla JS)          |
-| Containerization | Docker                                   |
-| Validasyon       | Pydantic v2                              |
+| Katman | Teknoloji |
+|---|---|
+| Backend | FastAPI, Uvicorn |
+| ML | XGBoost, scikit-learn, category_encoders |
+| Veri İşleme | Pandas, NumPy |
+| Frontend | HTML, Tailwind CSS (vanilla JS) |
+| Containerization | Docker |
+| Validasyon | Pydantic v2 |
 
 ---
 
@@ -181,12 +185,12 @@ uvicorn app.main:app --reload
 
 ## 📡 API Endpoints
 
-| Method | Endpoint       | Açıklama                    |
-| ------ | -------------- | --------------------------- |
-| `GET`  | `/`            | Web arayüzü                 |
-| `GET`  | `/api/health`  | Sağlık kontrolü             |
-| `GET`  | `/api/options` | Marka/model/şehir listeleri |
-| `POST` | `/api/predict` | Fiyat tahmini               |
+| Method | Endpoint | Açıklama |
+|---|---|---|
+| `GET` | `/` | Web arayüzü |
+| `GET` | `/api/health` | Sağlık kontrolü |
+| `GET` | `/api/options` | Marka/model/şehir listeleri |
+| `POST` | `/api/predict` | Fiyat tahmini |
 
 ### Örnek İstek
 
@@ -213,7 +217,8 @@ curl -X POST "http://127.0.0.1:8000/api/predict" \
 {
   "predicted_price": 1172729,
   "predicted_price_lower": 1114093,
-  "predicted_price_upper": 1231366
+  "predicted_price_upper": 1231366,
+  "confidence_level": 0.95
 }
 ```
 
@@ -288,6 +293,10 @@ Bu proje MIT lisansı altında dağıtılmaktadır.
 ![XGBoost](https://img.shields.io/badge/XGBoost-2.1.1-orange)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.5.2-F7931E?logo=scikitlearn)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Render-46E3B7?logo=render)](https://car-price-prediction-lhrp.onrender.com)
+
+> 🌐 **[Live Demo → car-price-prediction-lhrp.onrender.com](https://car-price-prediction-lhrp.onrender.com)**
+> ⚠️ Hosted on a free server — first load may take 30-60 seconds.
 
 ---
 
@@ -311,30 +320,30 @@ Users can enter details such as brand, model, variant, mileage, year, engine dis
 
 A real-world dataset of used car listings scraped from Turkey's leading second-hand car platforms.
 
-| Feature            | Value                        |
-| ------------------ | ---------------------------- |
-| Raw records        | 253,344                      |
-| After cleaning     | 250,121                      |
-| Number of brands   | 22                           |
-| Number of models   | 143                          |
-| Number of variants | 2,118                        |
-| Number of colors   | 18                           |
-| Number of cities   | 81                           |
-| Year range         | 1972 – 2025                  |
-| Price range        | 100,000 TRY – 10,000,000 TRY |
-| Average price      | 1,094,579 TRY                |
-| Median price       | 879,000 TRY                  |
+| Feature | Value |
+|---|---|
+| Raw records | 253,344 |
+| After cleaning | 250,121 |
+| Number of brands | 22 |
+| Number of models | 143 |
+| Number of variants | 2,118 |
+| Number of colors | 18 |
+| Number of cities | 81 |
+| Year range | 1972 – 2025 |
+| Price range | 100,000 TRY – 10,000,000 TRY |
+| Average price | 1,094,579 TRY |
+| Median price | 879,000 TRY |
 
-| Column    | Description      |
-| --------- | ---------------- |
-| `brand`   | Car brand        |
-| `model`   | Car model        |
-| `variant` | Trim / package   |
-| `km`      | Mileage          |
-| `year`    | Model year       |
-| `color`   | Car color        |
-| `city`    | Listing city     |
-| `price`   | Sale price (TRY) |
+| Column | Description |
+|---|---|
+| `brand` | Car brand |
+| `model` | Car model |
+| `variant` | Trim / package |
+| `km` | Mileage |
+| `year` | Model year |
+| `color` | Car color |
+| `city` | Listing city |
+| `price` | Sale price (TRY) |
 
 ---
 
@@ -344,21 +353,21 @@ A real-world dataset of used car listings scraped from Turkey's leading second-h
 
 ### Model Comparison
 
-| Model             | MAE (TRY)  | RMSE (TRY)  | R²         |
-| ----------------- | ---------- | ----------- | ---------- |
-| Linear Regression | 149,257    | 328,082     | 0.9214     |
-| Random Forest     | 133,281    | 244,164     | 0.9283     |
-| Gradient Boosting | 85,190     | 150,744     | 0.9644     |
-| LightGBM          | 91,974     | 168,757     | 0.9614     |
-| **XGBoost**       | **84,637** | **149,423** | **0.9649** |
+| Model | MAE (TRY) | RMSE (TRY) | R² |
+|---|---|---|---|
+| Linear Regression | 149,257 | 328,082 | 0.9214 |
+| Random Forest | 133,281 | 244,164 | 0.9283 |
+| Gradient Boosting | 85,190 | 150,744 | 0.9644 |
+| LightGBM | 91,974 | 168,757 | 0.9614 |
+| **XGBoost** | **84,637** | **149,423** | **0.9649** |
 
 ### ✅ Final Model (XGBoost — Tuned)
 
-| Metric       | Value           | Description                        |
-| ------------ | --------------- | ---------------------------------- |
-| **R² Score** | **0.9665**      | 96.65% of price variance explained |
-| **MAE**      | **80,341 TRY**  | Mean Absolute Error                |
-| **RMSE**     | **139,915 TRY** | Root Mean Squared Error            |
+| Metric | Value | Description |
+|---|---|---|
+| **R² Score** | **0.9665** | 96.65% of price variance explained |
+| **MAE** | **80,341 TRY** | Mean Absolute Error |
+| **RMSE** | **139,915 TRY** | Root Mean Squared Error |
 
 > Best hyperparameters: `n_estimators=800`, `max_depth=10`, `learning_rate=0.05`, `subsample=0.9`, `colsample_bytree=0.9`
 
@@ -378,14 +387,14 @@ A real-world dataset of used car listings scraped from Turkey's leading second-h
 
 ## 🛠️ Tech Stack
 
-| Layer            | Technology                               |
-| ---------------- | ---------------------------------------- |
-| Backend          | FastAPI, Uvicorn                         |
-| ML               | XGBoost, scikit-learn, category_encoders |
-| Data Processing  | Pandas, NumPy                            |
-| Frontend         | HTML, Tailwind CSS (vanilla JS)          |
-| Containerization | Docker                                   |
-| Validation       | Pydantic v2                              |
+| Layer | Technology |
+|---|---|
+| Backend | FastAPI, Uvicorn |
+| ML | XGBoost, scikit-learn, category_encoders |
+| Data Processing | Pandas, NumPy |
+| Frontend | HTML, Tailwind CSS (vanilla JS) |
+| Containerization | Docker |
+| Validation | Pydantic v2 |
 
 ---
 
@@ -462,12 +471,12 @@ uvicorn app.main:app --reload
 
 ## 📡 API Endpoints
 
-| Method | Endpoint       | Description                |
-| ------ | -------------- | -------------------------- |
-| `GET`  | `/`            | Web interface              |
-| `GET`  | `/api/health`  | Health check               |
-| `GET`  | `/api/options` | Brand / model / city lists |
-| `POST` | `/api/predict` | Price prediction           |
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/` | Web interface |
+| `GET` | `/api/health` | Health check |
+| `GET` | `/api/options` | Brand / model / city lists |
+| `POST` | `/api/predict` | Price prediction |
 
 ### Sample Request
 
@@ -494,7 +503,8 @@ curl -X POST "http://127.0.0.1:8000/api/predict" \
 {
   "predicted_price": 1172729,
   "predicted_price_lower": 1114093,
-  "predicted_price_upper": 1231366
+  "predicted_price_upper": 1231366,
+  "confidence_level": 0.95
 }
 ```
 

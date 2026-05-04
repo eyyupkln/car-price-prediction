@@ -1,0 +1,28 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# IDE
+.idea/
+.cursor/
+*.iml
+
+# Model
+models/*.pkl
+
+# Data
+data/*.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+*.env

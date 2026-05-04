@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Araba Fiyat Tahmini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root { color-scheme: light; }
+    </style>
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-50">
+    <div class="mx-auto max-w-6xl px-6 py-10">
+      <header class="flex flex-col gap-2">
+        <div class="inline-flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-400"></div>
+          <div>
+            <h1 class="text-2xl font-semibold tracking-tight">Araba Fiyat Tahmini</h1>
+            <p class="text-slate-300 text-sm">2. el aracınızın Türkiye fiyatını öğrenin</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-5">
+        <section class="lg:col-span-3 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-medium">Araç bilgileri</h2>
+            <button id="btnFillDemo" class="text-sm rounded-lg border border-slate-700 px-3 py-1.5 hover:bg-slate-800">
+              Demo doldur
+            </button>
+          </div>
+
+          <form id="form" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="sm:col-span-1">
+              <label class="text-sm text-slate-300">Marka</label>
+              <input id="brand" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" list="brands" placeholder="örn. toyota" required />
+              <datalist id="brands"></datalist>
+            </div>
+            <div class="sm:col-span-1">
+              <label class="text-sm text-slate-300">Model</label>
+              <input id="model" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" list="models" placeholder="örn. corolla" required />
+              <datalist id="models"></datalist>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="text-sm text-slate-300">Varyant</label>
+              <input id="variant" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" list="variants" placeholder="örn. 1.6 Advance" required />
+              <datalist id="variants"></datalist>
+            </div>
+
+            <div>
+              <label class="text-sm text-slate-300">Kilometre</label>
+              <input id="km" type="number" min="0" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" placeholder="175000" required />
+            </div>
+            <div>
+              <label class="text-sm text-slate-300">Model yılı</label>
+              <input id="year" type="number" min="1950" max="2026" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" placeholder="2016" list="years" required />
+              <datalist id="years"></datalist>
+            </div>
+            <div>
+              <label class="text-sm text-slate-300">Motor hacmi (cc)</label>
+              <input id="engine_cc" type="number" min="0" step="0.1" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" placeholder="1600" required />
+            </div>
+            <div>
+              <label class="text-sm text-slate-300">Renk</label>
+              <input id="color" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" list="colors" placeholder="örn. White" required />
+              <datalist id="colors"></datalist>
+            </div>
+            <div class="sm:col-span-1">
+              <label class="text-sm text-slate-300">Şehir</label>
+              <input id="city" class="mt-1 w-full rounded-xl bg-slate-950/40 border border-slate-800 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500" list="cities" placeholder="örn. istanbul" required />
+              <datalist id="cities"></datalist>
+            </div>
+
+            <div class="sm:col-span-2 flex items-center justify-between gap-3 pt-2">
+              <button id="btnPredict" type="submit" class="rounded-xl bg-indigo-600 px-4 py-2 font-medium hover:bg-indigo-500 disabled:opacity-60">
+                Tahmin et
+              </button>
+              <span id="status" class="text-sm text-slate-300"></span>
+            </div>
+          </form>
+        </section>
+
+        <aside class="lg:col-span-2 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+          <h2 class="text-lg font-medium">Sonuç</h2>
+          <div class="mt-4 rounded-2xl bg-slate-950/40 border border-slate-800 p-5">
+            <div class="text-sm text-slate-300">Tahmini fiyat</div>
+            <div id="predictedPrice" class="mt-1 text-3xl font-semibold tracking-tight">—</div>
+            <!--<div  id="predictedLog" class="mt-2 text-xs text-slate-400">log1p(price): —</div>-->
+          </div>
+
+          <div class="mt-4 rounded-2xl bg-slate-950/40 border border-slate-800 p-5">
+            <div class="text-sm text-slate-300">Tavsiye edilen fiyat Aralığı</div>
+            <div id="predictedRange" class="mt-1 text-3xl font-semibold tracking-tight"></div>
+             <!--<div  id="predictedLog" class="mt-2 text-xs text-slate-400">log1p(price): —</div>-->
+          </div>
+          <div class="mt-6 text-sm text-slate-300">
+            <p class="leading-6">
+              Not: Bu bir  <code class="text-slate-100">AI(Yapay Zeka)</code> modeli olduğu için hata yapabilir.
+            </p>
+          </div>
+
+        </aside>
+      </main>
+    </div>
+
+    <script>
+      const API_BASE = "";
+
+      const fmtTRY = (n) =>
+        new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 }).format(n);
+
+      const el = (id) => document.getElementById(id);
+
+      async function loadOptions() {
+        try {
+          const res = await fetch(`${API_BASE}/api/options`);
+          const data = await res.json();
+
+          const colorTranslations = {
+            "White": "Beyaz",
+            "Black": "Siyah",
+            "Gray": "Gri",
+            "Silver": "Gümüş",
+            "Red": "Kırmızı",
+            "Blue": "Mavi",
+            "Brown": "Kahverengi",
+            "Green": "Yeşil",
+            "Yellow": "Sarı",
+            "Orange": "Turuncu",
+            "Purple": "Mor",
+            "Beige": "Bej",
+            "Pink" :"Pembe",
+            "Silver Gray" :"Gümüş",
+            "Burgundy" :"Bordo",
+            "Navy" :"Lacivert",
+            "Smoke Gray" : "Füme",
+            "Turquoise" :"Turkuaz"
+          };
+
+          const bind = (listId, items, translations = {}) => {
+            const dl = el(listId);
+            dl.innerHTML = "";
+            (items || []).slice(0, 3000).forEach((v) => {
+                const o = document.createElement("option");
+
+                o.value = v; // Backend'e gidecek orijinal İngilizce veri
+
+                // Sözlükte çevirisi varsa onu kullan, yoksa orijinal İngilizce halini göster
+                o.textContent = translations[v] || v;
+
+                dl.appendChild(o);
+            });
+        };
+
+          bind("brands", data.brands);
+          bind("models", data.models);
+          bind("variants", data.variants);
+          bind("colors", data.colors, colorTranslations);
+          bind("cities", data.cities);
+          // years are ints; still okay for datalist
+          bind("years", (data.years || []).map(String));
+        } catch (e) {
+          el("status").textContent = "Seçenekler yüklenemedi (API kapalı olabilir).";
+        }
+      }
+
+      function fillDemo() {
+        el("brand").value = "toyota";
+        el("model").value = "corolla";
+        el("variant").value = "1.6 Advance";
+        el("km").value = 175000;
+        el("color").value = "White";
+        el("city").value = "istanbul";
+        el("year").value = 2016;
+        el("engine_cc").value = 1600;
+      }
+
+      el("btnFillDemo").addEventListener("click", (e) => {
+        e.preventDefault();
+        fillDemo();
+      });
+
+      el("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        el("status").textContent = "";
+        el("btnPredict").disabled = true;
+
+        const payload = {
+          features: {
+            brand: el("brand").value,
+            model: el("model").value,
+            variant: el("variant").value,
+            km: Number(el("km").value),
+            color: el("color").value,
+            city: el("city").value,
+            year: Number(el("year").value),
+            engine_cc: Number(el("engine_cc").value),
+          },
+        };
+
+        try {
+          const res = await fetch(`${API_BASE}/api/predict`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+
+          if (!res.ok) {
+            let msg = `HTTP ${res.status}`;
+            try {
+              const errJson = await res.json();
+              msg = errJson?.detail ? String(errJson.detail) : JSON.stringify(errJson);
+            } catch {
+              const txt = await res.text();
+              if (txt) msg = txt;
+            }
+            throw new Error(msg);
+          }
+
+          const data = await res.json();
+          el("predictedPrice").textContent = fmtTRY(data.predicted_price);
+          //el("predictedLog").textContent = `log1p(price): ${data.predicted_log_price.toFixed(4)}  |  raw: ${Number(data.predicted_raw).toFixed(4)}`;
+          el("predictedRange").textContent = `${fmtTRY(data.predicted_price_lower)} – ${fmtTRY(data.predicted_price_upper)}`;
+          //el("predictedRangeValue").textContent = `%${Math.round(Number(data.confidence_level) * 100)} güven aralığı. `
+        } catch (err) {
+          el("status").textContent = `Tahmin başarısız: ${err?.message || String(err)}`;
+        } finally {
+          el("btnPredict").disabled = false;
+        }
+      });
+
+      loadOptions();
+    </script>
+  </body>
+</html>
+

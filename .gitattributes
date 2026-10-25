@@ -1,2 +1,0 @@
-# Keep notebooks viewable while excluding them from GitHub language statistics.
-*.ipynb linguist-detectable=false
